@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/chatsFragment3">
+    <fragment
+        android:id="@+id/chatsFragment3"
+        android:name="com.syntax_institut.whatssyntax.ChatsFragment"
+        android:label="fragment_chats"
+        tools:layout="@layout/fragment_chats" >
+        <action
+            android:id="@+id/action_chatsFragment3_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_chatsFragment3_to_callFragment"
+            app:destination="@id/callFragment" />
+        <action
+            android:id="@+id/action_chatsFragment3_to_statusFragment"
+            app:destination="@id/statusFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.syntax_institut.whatssyntax.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/callFragment"
+        android:name="com.syntax_institut.whatssyntax.CallFragment"
+        android:label="fragment_call"
+        tools:layout="@layout/fragment_call" />
+    <fragment
+        android:id="@+id/statusFragment"
+        android:name="com.syntax_institut.whatssyntax.StatusFragment"
+        android:label="fragment_status"
+        tools:layout="@layout/fragment_status" />
+</navigation>
