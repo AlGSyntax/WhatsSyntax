@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.syntax_institut.whatssyntax.data.Datasource
 import com.syntax_institut.whatssyntax.databinding.ActivityMainBinding
 
 
