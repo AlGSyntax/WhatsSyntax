@@ -32,16 +32,20 @@ class ItemAdapter(private val dataSet: List<Chat>, private val isStatusFragment:
             } else {
                 lastMessage.visibility = View.GONE
                 if (isStatusFragment) {
-                    // Wende einen Graufilter an, wenn im StatusFragment und kein Status vorhanden ist
                     if (chat.contact.status == null) {
+                        // Wende einen Graufilter an, wenn kein Status vorhanden ist
                         profileImage.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY)
                     } else {
+                        // Entferne den Graufilter und setze den Click-Listener, wenn Status vorhanden ist
                         profileImage.clearColorFilter()
+                        itemView.setOnClickListener { clickListener(chat.contact) }
+                        itemView.isClickable = true
                     }
+                } else {
+                    // Für das ChatsFragment
+                    itemView.isClickable = false
+                    itemView.setOnClickListener(null)
                 }
-            }
-            itemView.setOnClickListener {
-                clickListener(chat.contact)
             }
         }
     }

@@ -31,11 +31,14 @@ class StatusFragment : Fragment() {
         // Konvertiere die sortierten Kontakte in Chat-Objekte und übergebe sie an den Adapter
         val chatList = sortedContacts.map { contact -> Chat(contact, mutableListOf()) }
         recyclerView.adapter = ItemAdapter(chatList, true) { contact ->
-            val bundle = Bundle().apply {
-                putString("status_message", contact.status?.text)
+            if (contact.status != null) {
+                val bundle = Bundle().apply {
+                    putString("status_message", contact.status.text)
+                }
+                findNavController().navigate(R.id.action_navigation_status_to_statusDetailFragment, bundle)
             }
-            findNavController().navigate(R.id.action_navigation_status_to_statusDetailFragment, bundle)
         }
+
 
         return view
     }
