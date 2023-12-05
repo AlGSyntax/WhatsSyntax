@@ -3,35 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/chatsFragment3">
+    app:startDestination="@id/navigation_chats">
+
     <fragment
-        android:id="@+id/chatsFragment3"
+        android:id="@+id/navigation_chats"
         android:name="com.syntax_institut.whatssyntax.ChatsFragment"
-        android:label="fragment_chats"
-        tools:layout="@layout/fragment_chats" >
-        <action
-            android:id="@+id/action_chatsFragment3_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_chatsFragment3_to_callFragment"
-            app:destination="@id/callFragment" />
-        <action
-            android:id="@+id/action_chatsFragment3_to_statusFragment"
-            app:destination="@id/statusFragment" />
-    </fragment>
+        android:label="@string/chats"
+        tools:layout="@layout/fragment_chats" />
+
     <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.syntax_institut.whatssyntax.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
-    <fragment
-        android:id="@+id/callFragment"
-        android:name="com.syntax_institut.whatssyntax.CallFragment"
-        android:label="fragment_call"
-        tools:layout="@layout/fragment_call" />
-    <fragment
-        android:id="@+id/statusFragment"
+        android:id="@+id/navigation_status"
         android:name="com.syntax_institut.whatssyntax.StatusFragment"
-        android:label="fragment_status"
+        android:label="@string/status"
         tools:layout="@layout/fragment_status" />
+
+    <fragment
+        android:id="@+id/navigation_calls"
+        android:name="com.syntax_institut.whatssyntax.CallFragment"
+        android:label="@string/calls"
+        tools:layout="@layout/fragment_call" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.syntax_institut.whatssyntax.SettingsFragment"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
