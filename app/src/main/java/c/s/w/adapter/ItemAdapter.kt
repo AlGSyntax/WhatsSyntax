@@ -36,6 +36,7 @@ class ItemAdapter(private val dataSet: List<Chat>) :
          *
          * @param chat : Das Chat-Objekt , das an diesen ViewHolder gebunden wird.
          *
+         *
          */
         fun bind(chat: Chat) {
             contactName.text = chat.contact.name
