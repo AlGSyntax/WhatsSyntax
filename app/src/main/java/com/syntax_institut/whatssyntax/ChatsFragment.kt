@@ -34,7 +34,9 @@ class ChatsFragment : Fragment() {
 
         val dataSource = Datasource()
         val chatList = dataSource.getChats() // Holen der Chat-Daten
-        recyclerView.adapter = ItemAdapter(chatList, false) // Verwendung der Chat-Daten
+        recyclerView.adapter = ItemAdapter(chatList, false){
+
+        } // Verwendung der Chat-Daten
 
         return view
     }

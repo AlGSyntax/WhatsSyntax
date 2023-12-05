@@ -10,8 +10,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.syntax_institut.whatssyntax.R
 import com.syntax_institut.whatssyntax.data.model.Chat
+import com.syntax_institut.whatssyntax.data.model.Contact
 
-class ItemAdapter(private val dataSet: List<Chat>, private val isStatusFragment: Boolean) :
+class ItemAdapter(private val dataSet: List<Chat>, private val isStatusFragment: Boolean,
+                  private val clickListener: (Contact) -> Unit) :
     RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -19,7 +21,7 @@ class ItemAdapter(private val dataSet: List<Chat>, private val isStatusFragment:
         val lastMessage: TextView = view.findViewById(R.id.textView_last_message)
         val profileImage: ImageView = view.findViewById(R.id.imageView_profile)
 
-        fun bind(chat: Chat, isStatusFragment: Boolean) {
+        fun bind(chat: Chat, isStatusFragment: Boolean,  clickListener: (Contact) -> Unit) {
             contactName.text = chat.contact.name
             profileImage.setImageResource(chat.contact.image)
 
@@ -38,6 +40,9 @@ class ItemAdapter(private val dataSet: List<Chat>, private val isStatusFragment:
                     }
                 }
             }
+            itemView.setOnClickListener {
+                clickListener(chat.contact)
+            }
         }
     }
 
@@ -48,7 +53,7 @@ class ItemAdapter(private val dataSet: List<Chat>, private val isStatusFragment:
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(dataSet[position], isStatusFragment)
+        holder.bind(dataSet[position], isStatusFragment, clickListener)
     }
 
     override fun getItemCount() = dataSet.size

@@ -15,7 +15,11 @@
         android:id="@+id/navigation_status"
         android:name="com.syntax_institut.whatssyntax.StatusFragment"
         android:label="@string/status"
-        tools:layout="@layout/fragment_status" />
+        tools:layout="@layout/fragment_status" >
+        <action
+            android:id="@+id/action_navigation_status_to_statusDetailFragment"
+            app:destination="@id/statusDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_calls"
@@ -28,4 +32,8 @@
         android:name="com.syntax_institut.whatssyntax.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/statusDetailFragment"
+        android:name="com.syntax_institut.whatssyntax.StatusDetailFragment"
+        android:label="StatusDetailFragment" />
 </navigation>
