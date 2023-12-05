@@ -27,12 +27,13 @@ class StatusFragment : Fragment() {
 
         // Hole die Kontaktliste aus der Datasource
         val dataSource = Datasource()
-        val contactList = dataSource.getContacts()
+        val sortedContacts = dataSource.getContacts().sortedWith(compareByDescending { it.status != null })
 
-        // Nutze den ItemAdapter mit der Kontaktliste
-        recyclerView.adapter = ItemAdapter(contactList.map { contact ->
-            Chat(contact, mutableListOf())
-        })
+
+        // Konvertiere die sortierten Kontakte in Chat-Objekte und übergebe sie an den Adapter
+        val chatList = sortedContacts.map { contact -> Chat(contact, mutableListOf()) }
+        recyclerView.adapter = ItemAdapter(chatList, true)
+
 
         return view
     }
