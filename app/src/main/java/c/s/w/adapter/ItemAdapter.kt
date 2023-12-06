@@ -173,7 +173,19 @@ class ItemAdapter(
  *
  *
  *
- *
+ *Zusammengefasste Erklärung des Codes:
+ *  *
+ *  * - onCreateViewHolder: Diese Methode ist wie das Vorbereiten eines leeren Rahmens, bevor ein
+ *                          Kunstwerk platziert wird. Es schafft ein neues Element-Layout für die
+ *                          kommenden Daten.
+ *  *
+ *  * - onBindViewHolder: Hier erhält jeder Rahmen (ViewHolder) tatsächlich ein Kunstwerk
+ *                        (Daten eines Anrufs). Der Adapter füllt jedes Element mit Inhalten -
+ *                        er setzt den Namen, die Zeit und das passende Bild für den Anruftyp.
+ *  *
+ *  * - getItemCount: Diese Methode sagt dem Kurator (Adapter),wie viele Kunstwerke (Anrufe) es
+ *                    insgesamt gibt, sodass er weiß, wie viele Rahmen (ViewHolders) er vorbereiten
+ *                    muss.
  *
  *
  *
