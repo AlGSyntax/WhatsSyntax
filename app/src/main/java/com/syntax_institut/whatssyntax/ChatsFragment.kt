@@ -70,22 +70,25 @@ class ChatsFragment : Fragment() {
  * Also stell dir vor, mein `ChatsFragment` ist wie ein Briefkasten in einem Apartmentgebäude.
  *
  * 1.Import-Anweisungen: Das sind wie die Werkzeuge und Materialien, die du brauchst,
- *   um deinen Briefkasten zu bauen und zu betreiben - Schrauben, Schraubenzieher,
- *   Briefschlitze usw. .
+ *                       um deinen Briefkasten zu bauen und zu betreiben - Schrauben,
+ *                       Schraubenzieher, Briefschlitze usw. .
  *
  * 2.Klassendefinition(`class ChatsFragment : Fragment()`): Hier baust du den Briefkasten.
- *   Ein Briefkasten in einem Apartmentgebäude,
- *   der für alle Bewohner zugänglich ist, ähnlich wie ein Fragment in einer Android-App,
- *   das einen Teil der Benutzeroberfläche darstellt.
+ *                                                          Ein Briefkasten in einem
+ *                                                          Apartmentgebäude, der für alle Bewohner
+ *                                                          zugänglich ist, ähnlich wie ein Fragment
+ *                                                          in einer Android-App, das einen Teil
+ *                                                          der Benutzeroberfläche darstellt.
  *
- * 3.RecyclerView-Deklaration: Das ist wie die Fächer in deinem Briefkasten.
- *   Jedes Fach repräsentiert einen Platz, wo Briefe (hier: Chat-Nachrichten)
- *   aufbewahrt werden können.
+ * 3.RecyclerView-Deklaration: Das ist wie die Fächer in deinem Briefkasten.Jedes Fach repräsentiert
+ *                             einen Platz, wo Briefe (hier: Chat-Nachrichten) aufbewahrt werden
+ *                             können.
  *
  * 4.onCreateView-Methode: Das ist der Prozess des Einrichtens des Briefkastens.
- *   Du öffnest den Briefkasten (inflating des Layouts), ordnest die Fächer an (Initialisierung von
- *   recyclerView und Setzen des LayoutManagers) und legst die Briefe (Chat-Nachrichten) in die
- *   Fächer (Adapter setzen, der bestimmt, wie die Nachrichten angezeigt werden).
+ *                         Du öffnest den Briefkasten (inflating des Layouts), ordnest die Fächer an
+ *                         (Initialisierung von recyclerView und Setzen des LayoutManagers) und
+ *                         legst die Briefe (Chat-Nachrichten) in die Fächer (Adapter setzen, der
+ *                         bestimmt, wie die Nachrichten angezeigt werden).
  *
  *    - Inflate des Layouts: Das ist, als würdest du den Briefkasten an die Wand montieren.
  *    - RecyclerView initialisieren: Das ist, als würdest du die Fächer in den Briefkasten einbauen.
