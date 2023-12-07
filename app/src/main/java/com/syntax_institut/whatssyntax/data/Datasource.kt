@@ -127,4 +127,14 @@ class Datasource {
         this.profile = profile
     }
 
+    fun getMessagesForChat(chatIndex: Int): MutableList<Message> {
+        // Überprüft, ob der Index innerhalb der Grenzen der Chat-Liste liegt.
+        if (chatIndex in chatList.indices) {
+            return chatList[chatIndex].messages
+        } else {
+            // Gibt eine leere Liste zurück, wenn der Index ungültig ist.
+            return mutableListOf()
+        }
+    }
 }
+

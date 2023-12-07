@@ -9,7 +9,11 @@
         android:id="@+id/navigation_chats"
         android:name="com.syntax_institut.whatssyntax.ChatsFragment"
         android:label="@string/chats"
-        tools:layout="@layout/fragment_chats" />
+        tools:layout="@layout/fragment_chats" >
+        <action
+            android:id="@+id/action_navigation_chats_to_chatsDetailFragment"
+            app:destination="@id/chatDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_status"
@@ -36,4 +40,14 @@
         android:id="@+id/statusDetailFragment"
         android:name="com.syntax_institut.whatssyntax.StatusDetailFragment"
         android:label="StatusDetailFragment" />
+    <fragment
+        android:id="@+id/chatDetailFragment"
+        android:name="com.syntax_institut.whatssyntax.ChatsDetailFragment"
+        android:label="chat_details"
+        tools:layout="@layout/fragment_chats_detail">
+        <argument
+            android:name="chatIndex"
+            app:argType="long" />
+    </fragment>
+
 </navigation>

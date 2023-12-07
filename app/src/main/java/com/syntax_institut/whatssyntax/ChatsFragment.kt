@@ -1,57 +1,54 @@
 package com.syntax_institut.whatssyntax
 
+// Imports, die du benötigen könntest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import c.s.w.adapter.ItemAdapter
 import com.syntax_institut.whatssyntax.data.Datasource
 
-// Definition der Klasse ChatsFragment, die von Fragment erbt.
-// Ein Fragment ist ein wiederverwendbarer Teil der Benutzeroberfläche in einer Android-App.
 class ChatsFragment : Fragment() {
 
-
-    // Deklaration einer privaten Variablen recyclerView vom Typ RecyclerView.
-    // RecyclerView wird verwendet , um Listen oder Gitter von Elementen darzustellen.
     private lateinit var recyclerView: RecyclerView
 
-    // Überschreiben der onCreateView-Methode , die aufgerufen wird , um das Layout des Fragments
-    // zu erstellen.
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        // Inflating (Erstellen) des Layouts für dieses Fragment.
-        // R.layout.fragment_chats bezieht sich auf die XML-Layout-Datei.
         val view = inflater.inflate(R.layout.fragment_chats, container, false)
-
-        // Initialisierung von recyclerView, in dem das RecyclerView-Objekt aus dem Layout
-        // geholt wird.
         recyclerView = view.findViewById(R.id.recycler_view_chats)
-        // Setzen des LayoutManagers für recyclerView
-        // LinearLayoutManager sorgt dafür, dass die Elemente linear angeordnet werden.
         recyclerView.layoutManager = LinearLayoutManager(context)
-
-
-        // Erstellung einer Instanz von Datasource, um Daten zu holen.
-        val dataSource = Datasource()
-        // Aufruf der getChats-Methode von dataSource, um eine Liste von Chats zu erhalten.
-        val chatList = dataSource.getChats() // Holen der Chat-Daten
-        // Setzen des Adapters für recyclerView mit der Chat-Liste
-        // Der Adapter ist zuständig für die Bereitstellung der Daten an die RecyclerView.
-        recyclerView.adapter = ItemAdapter(chatList, false) {
-
-        } // Verwendung der Chat-Daten
-
-        // Rückgabe der View, die das UI des Fragments darstellt.
         return view
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val dataSource = Datasource()
+        val chatList = dataSource.getChats()
+
+        recyclerView.adapter = ItemAdapter(chatList, false) { contact ->
+            // Finde den Index des Chat-Objekts basierend auf dem zugehörigen Kontakt
+            val chatIndex = chatList.indexOfFirst { it.contact == contact }
+            if (chatIndex != -1) {
+                // Verwende die chatIndex als chatId für die Navigation
+                val action = ChatsFragmentDirections.actionNavigationChatsToChatsDetailFragment(chatIndex.toLong())
+                findNavController().navigate(action)
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Bereinigungen, falls notwendig
+    }
 }
+
 
 /**
  *

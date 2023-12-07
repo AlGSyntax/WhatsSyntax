@@ -13,93 +13,64 @@ import com.syntax_institut.whatssyntax.data.model.Chat
 import com.syntax_institut.whatssyntax.data.model.Contact
 
 
-/**
- * Ein Adapter für RecyclerView, der verwendet wird, um Chat-Elemente anzuzeigen.
- *
- * @param dataSet : Eine Liste von Chat-Objekten , die die Daten für jeden Eintrag im RecyclerView
- *                  darstellen.
- *
- * @param isStatusFragment : Ein Boolean-Wert, der angibt , ob dieser Adapter im StatusFragment
- *                          verwendet wird.
- *
- * @param clickListener : Ein Lambda-Ausdruck der als Callback dient, wenn auf ein Element
- *                        geklickt wird.
- */
-class ItemAdapter(
-    private val dataSet: List<Chat>, private val isStatusFragment: Boolean,
-    private val clickListener: (Contact) -> Unit
-) :
-    RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+// ...
 
-    /**
-     * ViewHolder-Klasse, die für die Darstellung jedes einzelnen Elements im RecyclerView
-     * verantwortlich ist.
-     */
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ItemAdapter(
+    private val dataSet: List<Chat>,
+    private val isStatusFragment: Boolean,
+    private val chatClickListener: ((contact: Contact) -> Unit)? // Nehme an, dass der Listener die chatId als Parameter erwartet
+) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val contactName: TextView = view.findViewById(R.id.textView_contact_name)
         val lastMessage: TextView = view.findViewById(R.id.textView_last_message)
         val profileImage: ImageView = view.findViewById(R.id.imageView_profile)
 
+        init {
+            if (!isStatusFragment) {
+                view.setOnClickListener {
+                    // Der Klick-Listener wird nur im ChatsFragment verwendet, daher ist dies sicher
+                    chatClickListener?.invoke(dataSet[adapterPosition].contact) // Angenommen, Chat hat eine id-Eigenschaft
+                }
+            }
+        }
 
-        /**
-         * Diese Methode bindet Daten an die UI-Elemente des ViewHolders.
-         *
-         * @param chat : Das Chat-Objekt, das die Daten für diesen spezifischen Eintrag enthält.
-         *
-         * @param isStatusFragment : Gibt an , ob der Adapter im StatusFragment verwendet wird.
-         *
-         * @param clickListener : Der Callback, der ausgeführt wird, wenn auf das Element
-         *                        geklickt wird.
-         */
-        fun bind(chat: Chat, isStatusFragment: Boolean, clickListener: (Contact) -> Unit) {
-            // Setzt den Names des Kontaks und das Profilbild.
+        fun bind(chat: Chat) {
             contactName.text = chat.contact.name
             profileImage.setImageResource(chat.contact.image)
 
-            // Überprüft,ob Nachrichten vorhanden sind und zeigt die letzte Nachricht an.
             if (chat.messages.isNotEmpty()) {
                 lastMessage.text = chat.messages.last().text
                 lastMessage.visibility = View.VISIBLE
-                profileImage.clearColorFilter() // Entfernt den Graufilter für Chats mit Status
             } else {
-                // Verbirgt das Element für die letzte Nachricht, wenn keine vorhanden sind.
                 lastMessage.visibility = View.GONE
                 if (isStatusFragment) {
-                    if (chat.contact.status == null) {
-                        // Wende einen Graufilter an, wenn kein Status vorhanden ist,
-                        // oder setzt einen Click-Listener , wenn ein Status vorhanden ist.
-                        profileImage.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY)
-                    } else {
-                        // Entfern den Graufilter und setze den Click-Listener,
-                        // wenn Status vorhanden ist
-                        profileImage.clearColorFilter()
-                        itemView.setOnClickListener { clickListener(chat.contact) }
-                        itemView.isClickable = true
-                    }
-                } else {
-                    // Im ChatsFragment sind die Elemente nicht anklickbar.
-                    itemView.isClickable = false
-                    itemView.setOnClickListener(null)
+                    profileImage.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY) // Für Status ohne Nachrichten
+                }
+            }
+
+            if (isStatusFragment && chat.contact.status != null) {
+                itemView.setOnClickListener {
+                    // Hier wird der StatusFragment-spezifische Klick-Listener aufgerufen
+                    // Es wird angenommen, dass der StatusFragment-Listener keinen Parameter erwartet
+                    chatClickListener?.invoke(chat.contact) // Angenommen, Chat hat eine id-Eigenschaft
                 }
             }
         }
     }
 
-    // Erstellt und initialisiert den ViewHolder für jedes Element in im RecyclerView.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.chat_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.chat_item, parent, false)
         return ViewHolder(view)
     }
 
-    // Bindet die Daten an den ViewHolder.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(dataSet[position], isStatusFragment, clickListener)
+        holder.bind(dataSet[position])
     }
 
-    // Gibt die Anzahl der Elemente im dataSet zurück.
     override fun getItemCount() = dataSet.size
 }
+
 
 /**
  *
