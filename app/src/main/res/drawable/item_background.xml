@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#124E78"/> <!-- Weißer Hintergrund für das Item -->
+    <corners android:radius="16dp"/> <!-- Abgerundete Ecken, Radius anpassen für die gewünschte Rundung -->
+    <padding
+        android:left="16dp"
+        android:top="16dp"
+        android:right="16dp"
+        android:bottom="16dp"/> <!-- Padding innerhalb des Shapes -->
+</shape>

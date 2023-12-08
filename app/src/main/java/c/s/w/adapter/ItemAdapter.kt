@@ -12,9 +12,6 @@ import com.syntax_institut.whatssyntax.R
 import com.syntax_institut.whatssyntax.data.model.Chat
 import com.syntax_institut.whatssyntax.data.model.Contact
 
-
-// ...
-
 class ItemAdapter(
     private val dataSet: List<Chat>,
     private val isStatusFragment: Boolean,
@@ -39,23 +36,16 @@ class ItemAdapter(
             contactName.text = chat.contact.name
             profileImage.setImageResource(chat.contact.image)
 
-            if (chat.messages.isNotEmpty()) {
-                lastMessage.text = chat.messages.last().text
-                lastMessage.visibility = View.VISIBLE
+            // Setze den Graufilter nur, wenn kein Status vorhanden ist
+            if (isStatusFragment && chat.contact.status == null) {
+                profileImage.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY)
             } else {
-                lastMessage.visibility = View.GONE
-                if (isStatusFragment) {
-                    profileImage.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY) // Für Status ohne Nachrichten
-                }
+                // Entferne den Graufilter, wenn ein Status vorhanden ist oder es sich nicht um das StatusFragment handelt
+                profileImage.clearColorFilter()
             }
 
-            if (isStatusFragment && chat.contact.status != null) {
-                itemView.setOnClickListener {
-                    // Hier wird der StatusFragment-spezifische Klick-Listener aufgerufen
-                    // Es wird angenommen, dass der StatusFragment-Listener keinen Parameter erwartet
-                    chatClickListener?.invoke(chat.contact) // Angenommen, Chat hat eine id-Eigenschaft
-                }
-            }
+            lastMessage.text = chat.messages.lastOrNull()?.text ?: ""
+            lastMessage.visibility = if (chat.messages.isNotEmpty()) View.VISIBLE else View.GONE
         }
     }
 
@@ -70,6 +60,7 @@ class ItemAdapter(
 
     override fun getItemCount() = dataSet.size
 }
+
 
 
 /**

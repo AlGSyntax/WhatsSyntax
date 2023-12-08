@@ -10,4 +10,8 @@
     <string name="call_status">call_status</string>
     <string name="hint_enter_message">hint_enter_message</string>
     <string name="send">send\n</string>
+    <string name="profile">profile</string>
+    <string name="name">name</string>
+    <string name="phone_number">phone_number</string>
+    <string name="save">save</string>
 </resources>
