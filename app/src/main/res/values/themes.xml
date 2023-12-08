@@ -2,7 +2,8 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.WhatsSyntax" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/your_custom_color</item>
+
     </style>
 
     <style name="Theme.WhatsSyntax" parent="Base.Theme.WhatsSyntax" />

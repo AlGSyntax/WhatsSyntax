@@ -1,23 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- res/menu/bottom_nav_menu.xml -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/navigation_chats"
         android:icon="@drawable/icon_chat"
-        android:title="@string/chats" />
+        android:title="@string/chats"
+        app:iconTint="@color/nav_item_color_state" />
 
     <item
         android:id="@+id/navigation_status"
         android:icon="@drawable/icon_status"
-        android:title="@string/status" />
+        android:title="@string/status"
+        app:iconTint="@color/nav_item_color_state" />
 
     <item
         android:id="@+id/navigation_calls"
         android:icon="@drawable/icon_call"
-        android:title="@string/calls" />
+        android:title="@string/calls"
+        app:iconTint="@color/nav_item_color_state" />
 
     <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/icon_settings"
-        android:title="@string/settings" />
+        android:title="@string/settings"
+        app:iconTint="@color/nav_item_color_state" />
 </menu>
+
+
