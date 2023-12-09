@@ -15,7 +15,7 @@ import com.syntax_institut.whatssyntax.data.model.Contact
 class ItemAdapter(
     private val dataSet: List<Chat>,
     private val isStatusFragment: Boolean,
-    private val chatClickListener: ((contact: Contact) -> Unit)? // Nehme an, dass der Listener die chatId als Parameter erwartet
+    private val chatClickListener: ((contact: Contact) -> Unit)?
 ) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -24,10 +24,19 @@ class ItemAdapter(
         val profileImage: ImageView = view.findViewById(R.id.imageView_profile)
 
         init {
-            if (!isStatusFragment) {
-                view.setOnClickListener {
-                    // Der Klick-Listener wird nur im ChatsFragment verwendet, daher ist dies sicher
-                    chatClickListener?.invoke(dataSet[adapterPosition].contact) // Angenommen, Chat hat eine id-Eigenschaft
+            // Klick-Listener für den gesamten ViewHolder, unabhängig davon, in welchem Fragment er sich befindet
+            view.setOnClickListener {
+                // Hole den aktuellen Kontakt basierend auf der Position des ViewHolders
+                val contact = dataSet[adapterPosition].contact
+
+                // Prüfe, ob es sich um das StatusFragment handelt und der Kontakt einen Status hat
+                if (isStatusFragment && contact.status != null) {
+                    // Führe den übergebenen chatClickListener aus
+                    chatClickListener?.invoke(contact)
+                }
+                // Wenn es nicht das StatusFragment ist, navigiere basierend auf dem Klick-Listener des Chats
+                else if (!isStatusFragment) {
+                    chatClickListener?.invoke(contact)
                 }
             }
         }
@@ -35,17 +44,20 @@ class ItemAdapter(
         fun bind(chat: Chat) {
             contactName.text = chat.contact.name
             profileImage.setImageResource(chat.contact.image)
-
-            // Setze den Graufilter nur, wenn kein Status vorhanden ist
-            if (isStatusFragment && chat.contact.status == null) {
-                profileImage.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY)
+            if (isStatusFragment) {
+                // Setze den Graufilter nur, wenn kein Status vorhanden ist
+                if (chat.contact.status == null) {
+                    profileImage.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY)
+                } else {
+                    // Entferne den Graufilter, wenn ein Status vorhanden ist
+                    profileImage.clearColorFilter()
+                }
+                lastMessage.visibility = View.GONE
             } else {
-                // Entferne den Graufilter, wenn ein Status vorhanden ist oder es sich nicht um das StatusFragment handelt
-                profileImage.clearColorFilter()
+                // Im ChatsFragment zeigen wir die letzte Nachricht an
+                lastMessage.text = chat.messages.lastOrNull()?.text ?: ""
+                lastMessage.visibility = if (chat.messages.isNotEmpty()) View.VISIBLE else View.GONE
             }
-
-            lastMessage.text = chat.messages.lastOrNull()?.text ?: ""
-            lastMessage.visibility = if (chat.messages.isNotEmpty()) View.VISIBLE else View.GONE
         }
     }
 
