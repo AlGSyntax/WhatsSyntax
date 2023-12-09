@@ -15,4 +15,6 @@
     <string name="phone_number">phone_number</string>
     <string name="save">save</string>
     <string name="WhatsSyntax">WhatsSyntax</string>
+    <string name="kontaktname">Kontaktname</string>
+    <string name="datum_und_uhrzeit">Datum und Uhrzeit</string>
 </resources>
