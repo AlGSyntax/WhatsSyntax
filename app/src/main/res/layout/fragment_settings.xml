@@ -1,31 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@drawable/general_background">
+
+    <ImageView
+        android:id="@+id/imageViewProfile"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/pp_01"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="@string/profile_image"
+        android:clickable="true"
+        android:focusable="true" />
 
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="22dp"
-        android:hint="@string/name"
-        android:inputType="textPersonName" />
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/edittext_background"
+        android:fontFamily="@font/fontquicksand"
+        android:hint="@string/Name"
+        android:inputType="textPersonName"
+        android:padding="16dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="#FFFFFF" />
 
     <EditText
         android:id="@+id/editTextNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="22dp"
-        android:hint="@string/phone_number"
-        android:inputType="phone" />
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/edittext_background"
+        android:fontFamily="@font/fontquicksand"
+        android:hint="@string/Number"
+        android:inputType="phone"
+        android:padding="16dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="#FFFFFF" />
 
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save" />
+        android:text="@string/Save"
+        android:fontFamily="@font/fontquicksand"
+        android:backgroundTint="@color/your_custom_color"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp" />
 </LinearLayout>
+
 
