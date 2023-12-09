@@ -10,4 +10,5 @@
     <style name="ShapeAppearanceOverlay.App.Stroke" parent="">
         <item name="cornerSize">50%</item> <!-- Kreisförmig -->
     </style>
+
 </resources>
