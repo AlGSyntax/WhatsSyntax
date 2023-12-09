@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- res/layout/fragment_chats_detail.xml -->
+<?xml version="1.0" encoding="utf-8"?><!-- res/layout/fragment_chats_detail.xml -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -12,30 +11,58 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:background="@color/translucentTurquoise"
         android:orientation="horizontal"
-        android:background="@android:color/white">
+        android:padding="8dp">
 
-        <EditText
-            android:id="@+id/edittext_chatbox"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout_chatbox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="30dp"
-            android:hint="@string/hint_enter_message"
-            android:inputType="textCapSentences|textMultiLine"/>
+            app:boxBackgroundColor="@color/translucentTurquoise"
+            app:boxCornerRadiusBottomEnd="32dp"
+            app:boxCornerRadiusBottomStart="32dp"
+            app:boxCornerRadiusTopEnd="32dp"
+            app:boxCornerRadiusTopStart="32dp"
+            app:boxStrokeColor="@android:color/white"
+            app:hintTextColor="@android:color/white">
 
-        <Button
-            android:id="@+id/button_chatbox_send"
+            <EditText
+                android:id="@+id/edittext_chatbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="@string/Enter_your_Message_here"
+                android:inputType="textCapSentences|textMultiLine"
+                android:padding="16dp"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="@string/send"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            app:cardCornerRadius="32dp"
+            app:cardElevation="4dp">
+
+            <Button
+                android:id="@+id/button_chatbox_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/your_custom_color"
+                android:text="@string/send"
+                android:textColor="#FFFFFF" />
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 </LinearLayout>
+
+

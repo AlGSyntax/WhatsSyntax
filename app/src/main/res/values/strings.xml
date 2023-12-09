@@ -9,7 +9,7 @@
     <string name="profile_image">profile_image</string>
     <string name="call_status">call_status</string>
     <string name="hint_enter_message">hint_enter_message</string>
-    <string name="send">send\n</string>
+    <string name="send">Send\n</string>
     <string name="profile">profile</string>
     <string name="Name">YourName</string>
     <string name="Number">YourNumber</string>
@@ -17,4 +17,6 @@
     <string name="WhatsSyntax">WhatsSyntax</string>
     <string name="kontaktname">Kontaktname</string>
     <string name="datum_und_uhrzeit">Datum und Uhrzeit</string>
+    <string name="Here_your_Message">Put here your Message</string>
+    <string name="Enter_your_Message_here">"Enter your Message here ! "</string>
 </resources>
