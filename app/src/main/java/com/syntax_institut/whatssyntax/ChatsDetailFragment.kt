@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.syntax_institut.whatssyntax.adapter.MessageAdapter
+import c.s.w.adapter.MessageAdapter
 import com.syntax_institut.whatssyntax.data.model.Message
 
 class ChatsDetailFragment : Fragment() {

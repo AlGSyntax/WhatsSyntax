@@ -1,4 +1,4 @@
-package com.syntax_institut.whatssyntax.adapter
+package c.s.w.adapter
 
 import android.view.LayoutInflater
 import android.view.View
