@@ -13,7 +13,9 @@ import com.syntax_institut.whatssyntax.data.Datasource
 import com.syntax_institut.whatssyntax.data.model.Chat
 
 
-// Definition der Klasse StatusFragment, die von Fragment erbt.
+/**
+ * StatusFragment dient zur Anzeige der Status-Updates der Kontakte.
+ */
 class StatusFragment : Fragment() {
 
 
@@ -21,28 +23,43 @@ class StatusFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
 
 
-    // Überschreiben der onCreateView-Methode, um das Layout des Fragments zu erstellen.
+    /**
+     * onCreateView wird aufgerufen, um das Layout für das Fragment zu erstellen.
+     *
+     * @param inflater LayoutInflater-Objekt, das zum Aufblasen des Layouts verwendet wird.
+     * @param container Container für das Fragment.
+     * @param savedInstanceState Bundle, das den Zustand des Fragments speichert.
+     * @return Die erstellte View für das Fragment.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflating (Erstellen) des Layouts für dieses Fragment.
+
+        // Layout für das Fragment aufblasen und in einer View-Variable speichern.
         val view = inflater.inflate(R.layout.fragment_status, container, false)
 
-        // Initialsierung von recylcerView, um das RecyclerView-Objekt aus dem Layout zu erhalten.
+        // Initialisierung des RecyclerView, um die Status-Updates anzuzeigen.
         recyclerView = view.findViewById(R.id.recycler_view_status)
-        // Setzen eines LinearLayoutManager, um die Elemente linear anzuordnen.
+        // Setzen eines LinearLayoutManager für eine lineare Anordnung der Elemente.
         recyclerView.layoutManager = LinearLayoutManager(context)
 
 
-        // Erstellung einer Instanz von Datasource, um Daten zu holen.
+        // Instanzierung von Datasource, um Daten zu holen.
         val dataSource = Datasource()
         // Sortieren der Kontakte basierend darauf, ob sie einen Status haben oder nicht.
         val sortedContacts =
             dataSource.getContacts().sortedWith(compareByDescending { it.status != null })
 
         // Konvertierung der sortierten Kontakte in Chat-Objekte und Übergabe an den Adapter.
-        val chatList = sortedContacts.map { contact -> Chat(contact, mutableListOf()) }
+        val chatList = sortedContacts.map { contact ->
+            Chat(
+                contact,
+                mutableListOf()
+            )
+        }
+
+        // Setzen des ItemAdapters für das RecyclerView mit einer Lambda-Funktion für Klickereignisse.
         recyclerView.adapter = ItemAdapter(chatList, true) { contact ->
             // Wenn ein Kontakt einen Status hat, navigiere zum StatusDetailFragment.
             if (contact.status != null) {
@@ -67,6 +84,24 @@ class StatusFragment : Fragment() {
  * die für die Präsentation von Statusmeldungen eingerichtet ist.
  * Es verwendet verschiedene Werkzeuge und Methoden, um diese Statusmeldungen attraktiv
  * und interaktiv anzuzeigen.
+ *
+ * Zusammenfassung des StatusFragment-Codes
+ * Das StatusFragment ist für die Anzeige von Status-Updates in meiner App zuständig.
+ * Es nutzt ein RecyclerView zur Darstellung einer Liste von Kontakten, wobei Kontakte mit
+ * Status-Updates bevorzugt angezeigt werden. Die Hauptelemente des Codes umfassen:
+ *
+ * Layout-Initialisierung (onCreateView): Hier wird das Layout des Fragments erstellt
+ *                                        und das RecyclerView für die Anzeige der Status-Updates
+ *                                        initialisiert.
+ *
+ * Datenverarbeitung und Adapter-Initialisierung: Der Code lädt die Kontaktliste, sortiert
+ *                                                sie nach Vorhandensein von Status-Updates,
+ *                                                und konvertiert die sortierten Kontakte in eine
+ *                                                Liste von Chat-Objekten, die dem ItemAdapter
+ *                                                übergeben wird.
+ *
+ * Klick-Handling: Wenn ein Kontakt mit Status-Update angeklickt wird, navigiert das Fragment zum
+ *                 StatusDetailFragment, um weitere Details anzuzeigen.
  *
  * Analogie:
  * In dieser Analogie ist jeder Schritt im Code wie ein Teil des Prozesses des Aufbaus und der
@@ -104,6 +139,47 @@ class StatusFragment : Fragment() {
  * 6.Rückgabe der Ansicht: Nachdem alles aufgebaut und arrangiert ist, ist der Kiosk bereit
  *                         für Besucher. Die Rückgabe der Ansicht ist wie das Öffnen des Kiosks
  *                         für das Publikum.
+ *
+ *
+ * Selbstverständlich, Alvaro! Hier ist eine zusammenfassende Erklärung des StatusFragment-Codes mit einer passenden Analogie, um die Funktionsweise und Logik jeder Komponente zu veranschaulichen:
+ *
+ * Zusammenfassung des StatusFragment-Codes
+ * Das StatusFragment ist für die Anzeige von Status-Updates in deiner App zuständig.
+ * Es nutzt ein RecyclerView zur Darstellung einer Liste von Kontakten, wobei Kontakte mit
+ * Status-Updates bevorzugt angezeigt werden. Die Hauptelemente des Codes umfassen:
+ *
+ * Layout-Initialisierung (onCreateView): Hier wird das Layout des Fragments erstellt und das
+ *                                        RecyclerView für die Anzeige der Status-Updates
+ *                                        initialisiert.
+ *
+ * Datenverarbeitung und Adapter-Initialisierung: Der Code lädt die Kontaktliste,
+ *                                                sortiert sie nach Vorhandensein von
+ *                                                Status-Updates, und konvertiert die sortierten
+ *                                                Kontakte in eine Liste von Chat-Objekten,
+ *                                                die dem ItemAdapter übergeben wird.
+ *
+ * Klick-Handling: Wenn ein Kontakt mit Status-Update angeklickt wird, navigiert das Fragment zum
+ *                 StatusDetailFragment, um weitere Details anzuzeigen.
+ *
+ * Analogie zu jeder Komponente:
+ *
+ *
+ * Layout-Initialisierung (onCreateView): Stell dir vor, du richtest eine Ausstellung in einer
+ *                                        Kunstgalerie ein. Die Galerie (StatusFragment) hat Wände
+ *                                        (das RecyclerView), an denen Bilder (Status-Updates)
+ *                                        aufgehängt werden.
+ *
+ * Datenverarbeitung und Adapter-Initialisierung: Das ist wie das Sortieren von Gemälden nach ihrer
+ *                                                Bedeutung, wobei die bedeutendsten (Kontakte mit
+ *                                                Status-Updates) an prominentere Stellen gehängt
+ *                                                werden. Jedes Gemälde (Kontakt) wird in einen
+ *                                                Rahmen (Chat-Objekt) gesetzt und an der Wand
+ *                                                (im RecyclerView) präsentiert.
+ *
+ * Klick-Handling: Wenn ein Besucher (Benutzer) auf ein Gemälde (Kontakt mit Status) klickt,
+ *                 öffnet sich eine neue Ausstellungsräumlichkeit (StatusDetailFragment),
+ *                 die mehr Informationen und Details zu diesem spezifischen Kunstwerk
+ *                 (Status-Update) zeigt.
  */
 
 
