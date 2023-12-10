@@ -33,7 +33,8 @@ class ChatsDetailFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // Hole die chatId aus den SafeArgs
-        val dataSource = Datasource()
+        val mainActivity = activity as MainActivity
+        val dataSource = mainActivity.datasource
         val args: ChatsDetailFragmentArgs by navArgs()
         val chatIndex = args.chatIndex
 
@@ -53,7 +54,9 @@ class ChatsDetailFragment : Fragment() {
             if (messageText.isNotEmpty()) {
                 // Füge die neue Nachricht hinzu
                 val newMessage = Message(messageText, incoming = false) // 'incoming' basierend auf deiner Logik setzen
-                // Hier musst du die neue Nachricht auch in deine Datenquelle einfügen
+                dataSource.addMessageToChat(chatIndex.toInt(), newMessage)
+
+
 
                 messageAdapter.addMessage(newMessage)
                 messageEditText.text.clear() // Clear the input box after sending

@@ -1,5 +1,6 @@
 package com.syntax_institut.whatssyntax.data
 
+import android.util.Log
 import com.syntax_institut.whatssyntax.R
 import com.syntax_institut.whatssyntax.data.model.Call
 import com.syntax_institut.whatssyntax.data.model.Chat
@@ -58,7 +59,7 @@ class Datasource {
         Call(contactList[19], true, true, "03.10.2023 10:30")
     )
 
-    private val chatList = listOf(
+    private val chatList = mutableListOf(
         Chat(contactList[2], mutableListOf(
             Message("Hallo!", true),
             Message("Hi, wie geht's?", false),
@@ -136,5 +137,15 @@ class Datasource {
             return mutableListOf()
         }
     }
+    fun addMessageToChat(chatIndex: Int, message: Message) {
+        // Überprüft, ob der Index innerhalb der Grenzen der Chat-Liste liegt.
+        if (chatIndex in chatList.indices) {
+            // Fügt die neue Nachricht zum Chat hinzu.
+            chatList[chatIndex].messages.add(message)
+        } else {
+            Log.d("Datasource","ungültig")
+        }
+    }
 }
+
 

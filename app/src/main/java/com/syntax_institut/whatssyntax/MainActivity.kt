@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.syntax_institut.whatssyntax.data.Datasource
 import com.syntax_institut.whatssyntax.databinding.ActivityMainBinding
 
 /**
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     // Binding-Instanz für das Layout der MainActivity
     private lateinit var binding: ActivityMainBinding
+    val datasource = Datasource()
 
 
     /**
