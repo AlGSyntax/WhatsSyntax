@@ -1,5 +1,6 @@
 package com.syntax_institut.whatssyntax
 
+// Import-Anweisungen für benötigte Klassen und Bibliotheken.
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,15 +26,14 @@ class CallFragment : Fragment() {
 
     /**
      * Erstellt und gibt die Ansicht für das Fragment zurück.
+     * Diese Methode ist Teil des Lebenszyklus des Fragments und wird verwendet,
+     * um das User Interface des Fragments zu initialisieren.
      *
-     * @param inflater : Der LayoutInflater, der verwendet wird, um das Layout des Fragments
-     *                   aufzublasen.
-     *
-     * @param container : Der Container, in den das Fragment eingefügt wird.
-     *
-     * @param savedInstanceState : Ein Bundle, das den vorherigen Zustand des Fragments speichert.
-     *
-     * @return : Die erstellte Ansicht.
+     * @param inflater: Der LayoutInflater, der verwendet wird, um das Layout des Fragments
+     *                  aufzublasen.
+     * @param container: Der Container, in den das Fragment eingefügt wird.
+     * @param savedInstanceState: Ein Bundle, das den vorherigen Zustand des Fragments speichert.
+     * @return Die erstellte Ansicht.
      */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +56,7 @@ class CallFragment : Fragment() {
         // Der Lambda-Ausdruck für den Klick-Listener ist leer , da er später definiert wird.
         callsAdapter = CallsAdapter(callList) { call ->
             // Hier kann Logik für Klick-Events hinzugefügt werden, z.B. um den Dialer zu öffnen.
+            // Dies ermöglicht es den Benutzern, direkt aus der App Anrufe zu tätigen.
         }
 
         // Adapter an die RecyclerView anhängen.

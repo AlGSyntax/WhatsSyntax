@@ -1,5 +1,6 @@
 package c.s.w.adapter
 
+// Import-Anweisungen für benötigte Klassen und Bibliotheken.
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
@@ -15,8 +16,8 @@ import com.syntax_institut.whatssyntax.R
 /**
  * Adapter für die RecyclerView, der Anrufdaten darstellt.
  *
- * @param callList : Liste von Anrufdaten, die angezeigt werden sollen.
- * @param clickListener : Lambda-Funktion, die bei einem Klick auf ein Item ausgelöst wird.
+ * @param callList: Liste von Anrufdaten, die angezeigt werden sollen.
+ * @param clickListener: Lambda-Funktion, die bei einem Klick auf ein Item ausgelöst wird.
  */
 class CallsAdapter(private val callList: List<Call>, private val clickListener: (Call) -> Unit) :
     RecyclerView.Adapter<CallsAdapter.ViewHolder>() {
@@ -25,7 +26,7 @@ class CallsAdapter(private val callList: List<Call>, private val clickListener: 
      * ViewHolder-Klasse, die für das Halten der View-Referenzen verantwortlich ist und das
      * Binden der Daten an die Views übernimmt.
      *
-     * @param view : Die View, in der die Anrufinformationen angezeigt werden.
+     * @param view: Die View, in der die Anrufinformationen angezeigt werden.
      */
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -36,13 +37,14 @@ class CallsAdapter(private val callList: List<Call>, private val clickListener: 
         /**
          * Bindet die Anrufdaten an die entsprechenden Views.
          *
-         * @param call : Das Anruf-Objekt, das die darzustellenden Daten enthält.
+         * @param call: Das Anruf-Objekt, das die darzustellenden Daten enthält.
          */
         fun bind(call: Call) {
             contactName.text = call.contact.name
             callInfo.text = call.time
 
             // Entscheidet, welches Icon basierend auf dem Anrufsstatus gesetzt werden soll.
+            // Grün für angenommene Anrufe, Rot für verpasste.
             val icon = when {
                 call.incoming && call.accepted -> R.drawable.icon_call_accepted
                 call.incoming && !call.accepted -> R.drawable.icon_call_missed
@@ -84,9 +86,9 @@ class CallsAdapter(private val callList: List<Call>, private val clickListener: 
     /**
      * Erstellt einen neuen ViewHolder, wenn der RecyclerView ein neues Item benötigt.
      *
-     * @param parent : Die ViewGroup, in der neue View eingefügt wird.
+     * @param parent: Die ViewGroup, in der neue View eingefügt wird.
      *
-     * @param viewType : Der View-Typ des neuen Views.
+     * @param viewType: Der View-Typ des neuen Views.
      *
      * @return : Eine neue Instanz von ViewHolder.
      */

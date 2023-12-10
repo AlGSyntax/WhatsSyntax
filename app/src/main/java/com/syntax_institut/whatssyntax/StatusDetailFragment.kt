@@ -20,9 +20,9 @@ class StatusDetailFragment : Fragment() {
      * Diese Methode ist Teil des Lebenszyklus des Fragments und wird verwendet,
      * um das User Interface des Fragments zu initialisieren.
      *
-     * @param inflater LayoutInflater-Objekt, das zum Aufblasen des Layouts verwendet wird.
-     * @param container Der übergeordnete Container, in dem das Fragment dargestellt wird.
-     * @param savedInstanceState Ein Bundle, das den gespeicherten Zustand des Fragments enthält.
+     * @param inflater: LayoutInflater-Objekt, das zum Aufblasen des Layouts verwendet wird.
+     * @param container: Der übergeordnete Container, in dem das Fragment dargestellt wird.
+     * @param savedInstanceState: Ein Bundle, das den gespeicherten Zustand des Fragments enthält.
      * @return Die erstellte View, die das UI des Fragments darstellt.
      */
     override fun onCreateView(

@@ -29,9 +29,9 @@ class ChatsDetailFragment : Fragment() {
     /**
      * onCreateView wird aufgerufen, um das Layout für das Fragment zu erstellen.
      *
-     * @param inflater LayoutInflater-Objekt, das zum Aufblasen des Layouts verwendet wird.
-     * @param container Container für das Fragment.
-     * @param savedInstanceState Bundle, das den Zustand des Fragments speichert.
+     * @param inflater: LayoutInflater-Objekt, das zum Aufblasen des Layouts verwendet wird.
+     * @param container: Container für das Fragment.
+     * @param savedInstanceState: Bundle, das den Zustand des Fragments speichert.
      * @return Die erstellte View für das Fragment.
      */
     override fun onCreateView(
