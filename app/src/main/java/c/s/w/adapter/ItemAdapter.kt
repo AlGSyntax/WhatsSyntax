@@ -1,5 +1,6 @@
 package c.s.w.adapter
 
+// Import-Anweisungen für die benötigten Klassen und Bibliotheken.
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.view.LayoutInflater
@@ -12,67 +13,129 @@ import com.syntax_institut.whatssyntax.R
 import com.syntax_institut.whatssyntax.data.model.Chat
 import com.syntax_institut.whatssyntax.data.model.Contact
 
+
+/**
+ * Adapter für die RecyclerView, der für die Darstellung von Chat- und Status-Elementen
+ * verwendet wird.
+ *
+ * @param dataSet: Liste von Chat-Objekten, die im Adapter angezeigt werden sollen.
+ * @param isStatusFragment: Boolean-Wert, der angibt, ob der Adapter im StatusFragment verwendet
+ *                          wird.
+ * @param chatClickListener: Lamba-Funktion, die aufgerufen wird, wenn ein Chat-Element angeklickt
+ *                           wird.
+ *
+ */
 class ItemAdapter(
     private val dataSet: List<Chat>,
     private val isStatusFragment: Boolean,
     private val chatClickListener: ((contact: Contact) -> Unit)?
 ) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
+    /**
+     * ViewHolder-Klasse für die Darstellung jedes einzelnen Chat- oder Status-Elements.
+     *
+     * @param view: Das View-Objekt, das für jedes Element in der RecyclerView verwendet wird.
+     *
+     */
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        // Deklaration und Initialisierung der UI-Elemente.
         val contactName: TextView = view.findViewById(R.id.textView_contact_name)
         val lastMessage: TextView = view.findViewById(R.id.textView_last_message)
         val profileImage: ImageView = view.findViewById(R.id.imageView_profile)
 
+        // Initialisierung eines Click-Listeners für jedes Element.
         init {
-            // Klick-Listener für den gesamten ViewHolder, unabhängig davon, in welchem Fragment er sich befindet
+
+            // Setzen des OnClickListener für die gesamte Ansicht.
             view.setOnClickListener {
-                // Hole den aktuellen Kontakt basierend auf der Position des ViewHolders
+
                 val contact = dataSet[adapterPosition].contact
 
-                // Prüfe, ob es sich um das StatusFragment handelt und der Kontakt einen Status hat
+
                 if (isStatusFragment && contact.status != null) {
                     // Führe den übergebenen chatClickListener aus
                     chatClickListener?.invoke(contact)
-                }
-                // Wenn es nicht das StatusFragment ist, navigiere basierend auf dem Klick-Listener des Chats
-                else if (!isStatusFragment) {
+                } else if (!isStatusFragment) {
                     chatClickListener?.invoke(contact)
                 }
             }
         }
 
+
+        /**
+         * Bindet die Daten eines Chat-Objekts an die Ansicht.
+         *
+         * @param chat: Das Chat-Objekt, das an die Ansicht gebunden werden soll.
+         */
+
         fun bind(chat: Chat) {
+
+            // Setzen des Namens und des Profilbildes des Kontakts.
             contactName.text = chat.contact.name
             profileImage.setImageResource(chat.contact.image)
+
+            // Anpassung der Ansicht basierend darauf, ob es sich um das StatusFragment handelt.
             if (isStatusFragment) {
-                // Setze den Graufilter nur, wenn kein Status vorhanden ist
+
+                // Anzeigelogik für Status-Updates.
                 if (chat.contact.status == null) {
+
+                    // Setze Graufilter, falls kein Status vorhanden ist.
                     profileImage.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY)
                 } else {
-                    // Entferne den Graufilter, wenn ein Status vorhanden ist
+
+                    // Entferne den Filter, falls ein Status vorhanden ist.
                     profileImage.clearColorFilter()
                 }
+
+                // Verstecke die letzte Nachricht im StatusFragment.
                 lastMessage.visibility = View.GONE
             } else {
-                // Im ChatsFragment zeigen wir die letzte Nachricht an
+
+                // Logik für das Anzeigen der letzten Nachricht im ChatsFragment.
                 lastMessage.text = chat.messages.lastOrNull()?.text ?: ""
                 lastMessage.visibility = if (chat.messages.isNotEmpty()) View.VISIBLE else View.GONE
             }
         }
     }
 
+
+    /**
+     * Erstellt und gibt einen neuen ViewHolder zurück.
+     *
+     * @param parent: Die ViewGroup, in der jeder neue ViewHolder gehalten wird.
+     * @param viewType: Der View-Typ des neuen Views.
+     * @return Eine neue Instanz von ViewHolder.
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
+        // Aufblähen der Layout-Datei für einzelne Chat-Elemente.
         val view = LayoutInflater.from(parent.context).inflate(R.layout.chat_item, parent, false)
         return ViewHolder(view)
     }
 
+
+    /**
+     * Bindet die Daten an einen bestimmten ViewHolder.
+     *
+     * @param holder Der ViewHolder, der an die Daten gebunden werden soll.
+     * @param position Die Position des Elements in der dataSet-Liste.
+     */
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+        // Übergabe der Chatdaten an die bind-Methode des ViewHolders.
         holder.bind(dataSet[position])
     }
 
+
+    /**
+     * Gibt die Gesamtanzahl der Elemente in der dataSet-Liste zurück.
+     *
+     * @return Die Anzahl der Elemente in dataSet.
+     */
     override fun getItemCount() = dataSet.size
 }
-
 
 
 /**
@@ -83,6 +146,29 @@ class ItemAdapter(
  * Der `ItemAdapter` in deiner App ist wie ein spezialisierter Aussteller in einem Laden,
  * der verschiedene Produkte (hier Chats und Kontakte) in Regalen anzeigt. Er nimmt eine Liste
  * von Objekten und zeigt sie in einer strukturierten und interaktiven Weise an.
+ * Zusammenfassung des ItemAdapter-Codes
+ * Der ItemAdapter ist ein spezieller Adapter für eine RecyclerView, der verwendet wird,
+ * um eine Liste von Chat- und Status-Elementen in deiner App darzustellen. Er besteht aus
+ * mehreren Schlüsselkomponenten:
+ *
+ * Konstruktor: Hier werden die Daten für die Chat-Elemente (dataSet), eine Flagge, die angibt,
+ *              ob es sich um das StatusFragment handelt (isStatusFragment), und ein Lambda für
+ *              Klickereignisse (chatClickListener) übergeben.
+ *
+ * ViewHolder: Eine innere Klasse, die für die Darstellung jedes Elements in der RecyclerView
+ *             zuständig ist. Sie initialisiert die UI-Komponenten und definiert das Verhalten bei
+ *             Klickereignissen.
+ *
+ * bind Methode: Bindet die Daten eines Chat-Objekts an die einzelnen Ansichten im ViewHolder.
+ *               Die Darstellung ändert sich je nachdem, ob es sich um das Chats- oder das
+ *               StatusFragment handelt.
+ *
+ * onCreateViewHolder: Erstellt und gibt neue ViewHolder-Instanzen zurück.
+ *
+ * onBindViewHolder: Bindet die Daten an einen bestimmten ViewHolder basierend auf der Position in
+ *                   der Liste.
+ *
+ * getItemCount: Gibt die Anzahl der Elemente in der Datenliste zurück.
  *
  *
  *
@@ -161,6 +247,28 @@ class ItemAdapter(
  *                    insgesamt gibt, sodass er weiß, wie viele Rahmen (ViewHolders) er vorbereiten
  *                    muss.
  *
+ *
+ *Analogie zu jeder Methode
+ * Konstruktor: Denke an den Konstruktor wie an einen Koch, der Zutaten (Daten), ein Rezept
+ *              (ob es für das StatusFragment ist) und eine Anweisung für das Servieren
+ *              (Klickereignis) erhält.
+ *
+ * ViewHolder: Stelle dir den ViewHolder als Teller vor. Jeder Teller zeigt das Essen
+ * (Chat- oder Status-Element) und reagiert darauf, wenn jemand darauf tippt (Klickereignis).
+ *
+ * bind Methode: Diese Methode ist wie das Anrichten des Essens auf dem Teller. Abhängig davon,
+ *               ob es sich um einen Chat oder einen Status handelt, wird das Essen (die Chatdaten)
+ *               unterschiedlich angerichtet (anders dargestellt).
+ *
+ * onCreateViewHolder: Dies ist vergleichbar mit dem Vorbereiten neuer leerer Teller (ViewHolder),
+ *                     bereit zum Anrichten des Essens.
+ *
+ * onBindViewHolder: Denke an das Servieren des Essens. Jeder Teller (ViewHolder) bekommt das
+ *                   richtige Essen (Chat-Daten), basierend auf der Reihenfolge der Bestellungen
+ *                   (Position in der Liste).
+ *
+ * getItemCount: Dies ist wie das Zählen, wie viele Gerichte (Elemente) insgesamt serviert werden
+ *               müssen.
  *
  *
  *
