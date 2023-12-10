@@ -1,5 +1,6 @@
 package com.syntax_institut.whatssyntax
 
+// Import-Anweisungen für benötigte Klassen und Bibliotheken.
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,20 +8,39 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-// Defintion der Klasse StatusDetailFragment, die von Fragment erbt.
+/**
+ * StatusDetailFragment zur Anzeige eines spezifischen Status-Updates.
+ * Dieses Fragment wird aufgerufen, um einen ausgewählten Status detailliert anzuzeigen.
+ */
 class StatusDetailFragment : Fragment() {
 
 
-    // Überschreiben der onCreateView-Methode, um das Layout des Fragments zu erstellen.
+    /**
+     * onCreateView wird aufgerufen, um das Layout des Fragments zu erstellen.
+     * Diese Methode ist Teil des Lebenszyklus des Fragments und wird verwendet,
+     * um das User Interface des Fragments zu initialisieren.
+     *
+     * @param inflater LayoutInflater-Objekt, das zum Aufblasen des Layouts verwendet wird.
+     * @param container Der übergeordnete Container, in dem das Fragment dargestellt wird.
+     * @param savedInstanceState Ein Bundle, das den gespeicherten Zustand des Fragments enthält.
+     * @return Die erstellte View, die das UI des Fragments darstellt.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflating (Erstellen) des Layouts für dieses Fragment.
-        // R.layout.fragment_status_detail bezieht sich auf die XML-Layout-Datei.
-        val view = inflater.inflate(R.layout.fragment_status_detail, container, false)
 
-        // Holen der übergebenen Statusmeldung aus dem Fragmentargument.
+        // Inflating (Erstellen) des Layouts für dieses Fragment.
+        // Das Layout wird aus der XML-Datei fragment_status_detail aufgeblasen.
+        // Der 'container' und 'false' bestimmen, wie das Layout in der übergeordneten View
+        // eingebettet wird.
+        val view = inflater.inflate(
+            R.layout.fragment_status_detail, container,
+            false
+        )
+
+        // Argumente, die vom vorherigen Fragment übergeben wurden, werden abgerufen.
+        // Hier wird geprüft, ob ein Status-Text übergeben wurde.
         val statusMessage = arguments?.getString("status_message")
 
         // Finden des TextView-Elements im Layout und Setzen des Textes auf die Statusmeldung.
