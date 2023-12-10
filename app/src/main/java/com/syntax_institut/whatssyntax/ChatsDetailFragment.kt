@@ -1,18 +1,17 @@
 package com.syntax_institut.whatssyntax
 
 import android.os.Bundle
-import com.syntax_institut.whatssyntax.data.model.Message
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.syntax_institut.whatssyntax.adapter.MessageAdapter
-import com.syntax_institut.whatssyntax.data.Datasource
+import com.syntax_institut.whatssyntax.data.model.Message
 
 class ChatsDetailFragment : Fragment() {
 
