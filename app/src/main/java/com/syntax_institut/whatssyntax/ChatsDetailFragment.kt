@@ -58,9 +58,13 @@ class ChatsDetailFragment : Fragment() {
 
 
 
-                messageAdapter.addMessage(newMessage)
-                messageEditText.text.clear() // Clear the input box after sending
-                recyclerView.scrollToPosition(messageAdapter.itemCount - 1) // Scroll to the bottom to show the latest message
+                val messageList = dataSource.getMessagesForChat(chatIndex.toInt())
+                messageAdapter.notifyItemInserted(messageList.size - 1)
+
+                // Clear the input box after sending
+                messageEditText.text.clear()
+                // Scroll to the bottom to show the latest message
+                recyclerView.scrollToPosition(messageList.size - 1)// Scroll to the bottom to show the latest message
             }
         }
 
